@@ -1,0 +1,226 @@
+.h-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center; /* This will vertically center your form container */
+  justify-content: center;
+  background: linear-gradient(to bottom, #8fc9ff, #EDF2F7); /* Gradient from blue to light blue */
+  position: relative; /* This will be the reference for absolute positioning */
+}
+
+.form-container {
+  position: relative;
+  padding: 4em; /* Adjust padding as needed */
+  margin: auto; /* Center the container on the page */
+  max-width: 600px; /* Adjust this to set the maximum width of the form */
+  z-index: 1; /* Positioned above the globe image */
+  /* No need for ::before pseudo-element */
+}
+
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Adjust width as needed */
+  height: 100%; /* Adjust height as needed */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* Contain the image within the pseudo-element */
+  opacity: 0.5; /* Adjust for desired transparency */
+  z-index: -1; /* Ensures the image stays in the background */
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCaret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+
+.animated-typing {
+  border-right: 0.15em solid black; /* The caret */
+  font-size: 3rem; /* 48px font size */
+  font-weight: 700; /* Bold font */
+  color: #3182ce; /* Blue text */
+  margin-bottom: 1.5rem; /* Margin bottom of 24px */
+  padding-right: 0.1em;
+  overflow: hidden; /* Hides the text if it overflows the width */
+  white-space: nowrap; /* Keeps the text on a single line */
+  width: 0;
+  animation: typing 3.5s steps(40, end) forwards, blinkCaret 0.75s step-end infinite;
+  animation-iteration-count: 1, 5; /* blinkCaret will run only 5 times */
+  animation-fill-mode: forwards; /* Keep the state after the last keyframe */
+}
+
+.globe-img {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%; /* Adjust if needed */
+  opacity: 0.5; /* Adjust if needed */
+  z-index: 0; /* Ensures the image stays behind the form container */
+  animation: spin 60s linear infinite; /* Adjust the time for one full rotation as needed */
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.p-8 {
+  padding: 2rem; /* Padding of 32px */
+}
+
+.bg-white {
+  background-color: #ffffff; /* White background */
+}
+
+.shadow-xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.rounded-2xl {
+  border-radius: 1rem; /* 16px border radius */
+}
+
+.text-5xl {
+  font-size: 3rem; /* 48px font size */
+}
+
+.font-bold {
+  font-weight: 700; /* Bold font */
+}
+
+.text-blue-600 {
+  color: #3182ce; /* Blue text */
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem; /* Margin bottom of 24px */
+}
+
+.text-xl {
+  font-size: 1.25rem; /* 20px font size */
+}
+
+.text-blue-500 {
+  color: #4299e1; /* Lighter blue text */
+}
+
+.mb-8 {
+  margin-bottom: 2rem; /* Margin bottom of 32px */
+}
+
+.mb-4 {
+  margin-bottom: 1rem; /* Margin bottom of 16px */
+}
+
+.px-4 {
+  padding-left: 1rem; /* Padding left of 16px */
+  padding-right: 1rem; /* Padding right of 16px */
+}
+
+.py-2 {
+  padding-top: 0.5rem; /* Padding top of 8px */
+  padding-bottom: 0.5rem; /* Padding bottom of 8px */
+}
+
+.border-2 {
+  border-width: 2px; /* 2px border */
+}
+
+.border-blue-500 {
+  border-color: #4299e1; /* Blue border */
+}
+
+.rounded-lg {
+  border-radius: 0.5rem; /* 8px border radius */
+}
+
+.text-blue-700 {
+  color: #2b6cb0; /* Dark blue text */
+}
+
+.focus\:ring-blue-400:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(100, 149, 237, 0.5); /* Blue ring on focus */
+}
+
+.focus\:border-blue-400:focus {
+  border-color: #63b3ed; /* Blue border on focus */
+}
+
+.w-full {
+  width: 100%; /* Full width */
+}
+
+.px-8 {
+  padding-left: 2rem; /* Padding left of 32px */
+  padding-right: 2rem; /* Padding right of 32px */
+}
+
+.py-3 {
+  padding-top: 0.75rem; /* Padding top of 12px */
+  padding-bottom: 0.75rem; /* Padding bottom of 12px */
+}
+
+.bg-blue-500 {
+  background-color: #4299e1; /* Blue background */
+}
+
+.text-white {
+  color: #ffffff; /* White text */
+}
+
+.font-semibold {
+  font-weight: 600; /* Semi-bold font */
+}
+
+.rounded-lg {
+  border-radius: 0.5rem; /* 8px border radius */
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #2b6cb0; /* Darker blue on hover */
+}
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 4px rgba(100, 149, 237, 0.5); /* Blue ring on focus */
+}
+
+.focus\:ring-opacity-50:focus {
+  opacity: 0.5;
+}

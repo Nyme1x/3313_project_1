@@ -1,0 +1,72 @@
+.tabs-container {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  /* .tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
+  } */
+  
+  /* .tab.active {
+    color: #2563eb;
+  } */
+  
+  .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 33.3333%;
+    height: 3px;
+    background-color: blue;
+
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .input {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    border: 1px solid #2563eb;
+    border-radius: 0.5rem;
+    width: 80%;
+  }
+  
+  .join-button {
+    display: block;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .tab {
+    text-decoration: none; /* Removes the underline */
+    /* Other styling */
+  }
+  
+  .tab.active {
+    /* Style for active tab, excluding the text-decoration property if it's previously set to underline */
+    position: relative;
+  }
+  
+  /* If .tab.active has text-decoration set to underline, explicitly remove it */
+  .tab.active {
+    text-decoration: none;
+  }
+  

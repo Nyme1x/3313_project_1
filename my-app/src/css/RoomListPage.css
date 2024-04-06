@@ -1,0 +1,65 @@
+.room-list-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  position: relative; /* For the active tab highlight */
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from links */
+  color: black; /* Default color for tabs */
+}
+
+.tab.active {
+  color: #3b82f6; /* Active tab color */
+}
+
+.tab.active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.room-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.room-name {
+  margin-right: 1rem;
+}
+
+.join-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #3b82f6;
+  color: white;
+}
+
