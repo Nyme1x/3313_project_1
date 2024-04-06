@@ -1,38 +1,69 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import './../css/RoomListPage.css'; // Make sure to import the CSS file
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './../css/TabNavigation.css';
 
 const RoomListPage = () => {
-  const location = useLocation();
-  const rooms = [
-    { name: 'Study Group' },
-    { name: 'Conference' },
-    { name: 'Video games' }
-  ];
+  const navigate = useNavigate(); // Used to navigate to the room after joining
+  const [rooms, setRooms] = useState([]);
+  const [websocket, setWebsocket] = useState(null);
 
-  const handleJoinRoom = (roomName) => {
-    console.log(`Joining room: ${roomName}`);
-    // Add your logic to join the room here
-  };
+  useEffect(() => {
+    const ws = new WebSocket('ws://127.0.0.1:3000');
+    setWebsocket(ws);
 
-  const isTabActive = (path) => {
-    return location.pathname === path;
+    ws.onopen = () => {
+      console.log('Connected to WebSocket server');
+      ws.send(JSON.stringify({ action: 'LIST_CHATROOMS' }));
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.action === 'UPDATE_CHATROOMS') {
+        setRooms(data.chatrooms);
+      }
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket server');
+    };
+
+    return () => {
+      if (websocket) {
+        websocket.close();
+      }
+    };
+  }, []);
+
+  const handleJoinRoom = (roomCode) => {
+    console.log(`Joining room: ${roomCode}`);
+    if (websocket) {
+      websocket.send(JSON.stringify({ action: 'JOIN_ROOM', roomCode: roomCode }));
+      // Assume that the server sends back a confirmation message
+      // which you would handle in `ws.onmessage`
+      // On confirmation, navigate to the chatroom page
+      // For instance:
+      // navigate(`/chatroom/${roomCode}`);
+    }
   };
 
   return (
     <div className="room-list-container">
-      <div className="tabs">
-        <Link to="/rooms" className={`tab ${isTabActive('/RoomsListPage') ? 'active' : ''}`}></Link>
-        <Link to="/manual-join" className={`tab ${isTabActive('/manual-join') ? 'active' : ''}`}></Link>
-        <Link to="/CreateRoom" className={`tab ${isTabActive('/create-room') ? 'active' : ''}`}></Link>
-      </div>
+      {/* Your tabs here */}
       <div className="room-list">
-        {rooms.map((room, index) => (
-          <div key={index} className="room-entry">
-            <span className="room-name">{room.name}</span>
-            <button onClick={() => handleJoinRoom(room.name)} className="join-button">Join</button>
-          </div>
-        ))}
+        {rooms.length > 0 ? (
+          rooms.map((room, index) => (
+            <div key={index} className="room-entry">
+              <span className="room-name">{`Room Code: ${room.code} - Participants: ${room.participants}`}</span>
+              <button onClick={() => handleJoinRoom(room.code)} className="join-button">Join</button>
+            </div>
+          ))
+        ) : (
+          <p>No active chatrooms at the moment.</p>
+        )}
       </div>
     </div>
   );

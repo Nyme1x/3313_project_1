@@ -1,26 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './../css/TabNavigation.css';
 
 const TabNavigation = () => {
   const location = useLocation();
   const [underlineStyle, setUnderlineStyle] = useState({});
+  const tabRefs = useRef([]);
+
   const tabs = [
     { name: 'Join a Room', path: '/rooms' },
     { name: 'Manual Join', path: '/manual-join' },
     { name: 'Create a Room', path: '/create-room' },
   ];
 
-  // Calculate and update the underline position when the pathname changes
   useEffect(() => {
-    const currentTab = tabs.findIndex(tab => tab.path === location.pathname);
-    const percentage = (100 / tabs.length) * currentTab;
-    setUnderlineStyle({
-      left: `${percentage}%`,
-      width: `${100 / tabs.length}%`,
-      transition: 'left 0.3s ease-out', // This makes the slide effect
-    });
-  }, [location, tabs.length]);
+    // Function to find the active tab based on the current pathname
+    const findActiveTab = () => {
+      return tabRefs.current.find(tab => tab && tab.getAttribute('href') === location.pathname);
+    };
+
+    const updateUnderline = () => {
+      const activeTab = findActiveTab();
+      if (activeTab) {
+        const width = activeTab.offsetWidth;
+        const left = activeTab.offsetLeft;
+        setUnderlineStyle({
+          left: `${left}px`,
+          width: `${width}px`,
+          transition: 'left 0.3s ease-out, width 0.3s ease-out',
+        });
+      }
+    };
+
+    // Call the update function on mount and when location changes
+    updateUnderline();
+
+    // Optional: Resize listener to reposition underline on window resize
+    window.addEventListener('resize', updateUnderline);
+    return () => window.removeEventListener('resize', updateUnderline);
+  }, [location]);
 
   return (
     <div className="tabs-container">
@@ -29,6 +47,7 @@ const TabNavigation = () => {
           key={index}
           to={tab.path}
           className={({ isActive }) => (isActive ? 'tab active' : 'tab')}
+          ref={el => tabRefs.current[index] = el} // Store the DOM node
         >
           {tab.name}
         </NavLink>

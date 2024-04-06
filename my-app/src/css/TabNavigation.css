@@ -1,72 +1,87 @@
-.tabs-container {
-    display: flex;
-    justify-content: space-around;
-    background: white;
-    padding: 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  /* .tab {
-    padding: 0.5rem 1rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    transition: color 0.3s ease;
-    position: relative;
-    z-index: 1;
-  } */
-  
-  /* .tab.active {
-    color: #2563eb;
-  } */
-  
-  .underline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 33.3333%;
-    height: 3px;
-    background-color: blue;
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center; /* This will vertically center your form container */
+  justify-content: center;
+  background: linear-gradient(to bottom, #8fc9ff, #EDF2F7); /* Gradient from blue to light blue */
+  position: relative; /* This will be the reference for absolute positioning */
+}
 
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .input {
-    display: block;
-    margin: 1rem auto;
-    padding: 0.5rem;
-    border: 1px solid #2563eb;
-    border-radius: 0.5rem;
-    width: 80%;
-  }
-  
-  .join-button {
-    display: block;
-    margin: 0 auto;
-    padding: 0.5rem 1rem;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  .tab {
-    text-decoration: none; /* Removes the underline */
-    /* Other styling */
-  }
-  
-  .tab.active {
-    /* Style for active tab, excluding the text-decoration property if it's previously set to underline */
-    position: relative;
-  }
-  
-  /* If .tab.active has text-decoration set to underline, explicitly remove it */
-  .tab.active {
-    text-decoration: none;
-  }
-  
+.tabs-container {
+  display: flex;
+  justify-content: start; /* Changed to 'start' to align tabs to the left */
+  align-items: center;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-top: 1rem;
+  width: auto; /* Adjust if you want a specific max width, or remove it to allow content sizing */
+  box-sizing: border-box;
+}
+
+.tab {
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  background: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.tab:hover {
+  background-color: #f0f0f0;
+}
+
+.tab.active {
+  background-color: white;
+  border-color: #000;
+  color: blue;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0; /* Initial position, will be overridden by JavaScript */
+  height: 3px;
+  background-color: blue;
+  transition: left 0.3s ease-out, width 0.3s ease-out;
+}   
+
+
+.room-list-container {
+  width: 85%; /* Adjust the width of the container */
+  max-width: 800px; /* You can adjust this value to be larger or smaller */
+  margin-right: 4rem;
+  background-color: white; /* Keeping the box white */
+  padding: 2rem; /* Increase padding inside the box */
+  border-radius: 15px; /* Slightly more rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+  margin-top: 2rem; /* Space between the tabs-container and room-list-container */
+  display: flex;
+  flex-direction: column; /* Stack room entries vertically */
+  align-items: flex-start; /* Align room entries to the start of the flex container */
+}
+
+.join-button {
+  padding: 0.5rem 1rem;
+  background-color: #2563eb; /* Keeps the join button blue */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 0.5rem; /* Space above the button */
+}
+
+.input {
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid #2563eb;
+  border-radius: 0.5rem;
+  width: calc(100% - 2rem); /* Full width minus padding */
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './../css/RoomListPage.css'; // Ensure the CSS path is correct
+import './../css/TabNavigation.css'; // Make sure to import the CSS file
 
 const CreateRoom = () => {
   const [roomName, setRoomName] = useState('');

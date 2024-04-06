@@ -1,6 +1,7 @@
     import React, { useState } from 'react';
     import { useNavigate } from 'react-router-dom';
-    import './../css/TabNavigation.css';
+    import './../css/TabNavigation.css'; // Make sure to import the CSS file
+    
 
     const ManualJoinPage = () => {
     const [roomName, setRoomName] = useState('');
