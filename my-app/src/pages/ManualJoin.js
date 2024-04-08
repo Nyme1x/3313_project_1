@@ -7,7 +7,7 @@ const ManualJoinPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [websocket, setWebsocket] = useState(null); 
-    const websocketUrl = 'ws://ws://127.0.0.1:5000';
+    const websocketUrl = 'ws://3.208.31.8:5000';
 
     useEffect(() => {
         const ws = new WebSocket(websocketUrl);

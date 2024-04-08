@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateRoom = () => {
   const [roomCodes, setRoomCodes] = useState([]);
   const navigate = useNavigate();
-  const websocketUrl = 'ws://127.0.0.1:5000';
+  const websocketUrl = 'ws://3.208.31.8:5000';
   let ws;
 
   useEffect(() => {

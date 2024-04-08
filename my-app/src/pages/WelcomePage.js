@@ -7,7 +7,7 @@ const WelcomePage = () => {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const websocketUrl = 'ws://127.0.0.1:5000';
+  const websocketUrl = 'ws://3.208.31.8:5000';
   
   useEffect(() => {
     if (username.trim()) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import './../css/Chatting.css'; 
+import { useParams, useNavigate } from 'react-router-dom'; // Import useHistory for navigation
+import './../css/Chatting.css';
 
 const Chatting = () => {
   const { roomCode } = useParams();
@@ -12,9 +12,20 @@ const Chatting = () => {
   const chunks = useRef([]);
   const currentUser = localStorage.getItem('username'); 
   const chatContentRef = useRef(null);
-  const websocketUrl = 'ws://127.0.0.1:5000';
+  const websocketUrl = 'ws://3.208.31.8:5000';
+  const Navigate = useNavigate(); 
 
+  const scrollToBottom = () => {
+    const scrollHeight = chatContentRef.current.scrollHeight;
+    const height = chatContentRef.current.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    chatContentRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  };
+
+  
+  
   useEffect(() => {
+    
     const username = localStorage.getItem('username');
     if (!username) {
       console.error('Username not found in local storage.');
@@ -48,6 +59,51 @@ const Chatting = () => {
     };
   }, [roomCode]);
 
+
+
+
+
+  const Message = React.memo(({ message, index }) => {
+    const isCurrentUserMessage = message.sender === currentUser; // Ensure `currentUser` is available in the context or passed as a prop
+  
+    useEffect(() => {
+      return () => {
+        if (message.isVoice) {
+          URL.revokeObjectURL(message.content);
+        }
+      };
+    // This effect depends on `message.content` and `message.isVoice`, so they should be in the dependency array
+    }, [message.content, message.isVoice]);
+  
+    return (
+      <div className={`message-bubble ${isCurrentUserMessage ? 'user-message' : 'other-message'}`}>
+        {/* Display sender's username for non-current user messages */}
+        {!isCurrentUserMessage && <span className="sender-username">{message.sender}: </span>}
+        {
+          message.isVoice ? (
+            // Render an audio control for voice messages
+            <audio src={message.content} controls />
+          ) : (
+            // Display text content for text messages
+            message.content
+          )
+        }
+      </div>
+    );
+  });
+
+  
+ 
+
+  const sendMessage = () => {
+    if (messageInput.trim() !== '') {
+      const msg = `MSG:${roomCode}:${messageInput}`;
+      ws.current.send(msg);
+      setMessageInput('');
+      animateMessageSend(); 
+    }
+  };
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       sendMessage();
@@ -69,15 +125,6 @@ const Chatting = () => {
         {message.content}
       </div>
     );
-  };
-
-  const sendMessage = () => {
-    if (messageInput.trim() !== '') {
-      const msg = `MSG:${roomCode}:${messageInput}`;
-      ws.current.send(msg);
-      setMessageInput('');
-      animateMessageSend(); 
-    }
   };
 
   const startRecording = () => {
@@ -121,6 +168,13 @@ const Chatting = () => {
     ws.current.send(msg);
   };
 
+  const scrollToBottom = () => {
+    if (chatContentRef.current) {
+      chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+    }
+  };
+  
+
   const animateMessageSend = () => {
     const inputElement = document.querySelector('.input');
     const sendButton = document.querySelector('.sendMessageButton');
@@ -149,12 +203,26 @@ const Chatting = () => {
     }, 500);
   };
 
+  // Function to navigate to home page
+  const navigateToHomePage = () => {
+    Navigate('/'); // Adjust the path as needed
+  };
+
+  
+
   return (
     <div className="chatting-container">
+      {/* Home Page Button with existing CSS classes for styling consistency */}
+      <button className="sendMessageButton" onClick={navigateToHomePage} style={{position: 'absolute', top: '10px', left: '10px'}}>
+        Home Page
+      </button>
+
       <div className="chat-content" ref={chatContentRef}>
         <h2>Chat Room: {roomCode}</h2>
-        <div className="display-message">
-          {messages.map((message, index) => renderMessage(message, index))}
+        <div className="display-message"> 
+        {messages.map((message, index) => (
+        <Message key={index} message={message} index={index} />   
+            ))}
         </div>
         <div className="messaging-form">
           <input
@@ -174,4 +242,5 @@ const Chatting = () => {
     </div>
   );
 };
+
 export default Chatting;

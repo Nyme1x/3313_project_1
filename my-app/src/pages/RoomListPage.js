@@ -8,7 +8,7 @@ import './../css/WelcomePage.css';
 const RoomListPage = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true); 
-  const websocketUrl = 'ws://127.0.0.1:5000';
+  const websocketUrl = 'ws://3.208.31.8:5000';
 
   useEffect(() => {
   
@@ -41,7 +41,7 @@ const RoomListPage = () => {
 
   return (
     <div className="room-list-container">
-      {loading ? (
+      {loading ?(
         <LoadingSpinner />
       ) : (
         <div className="room-list">
