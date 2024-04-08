@@ -6,7 +6,9 @@ import RoomListPage from './pages/RoomListPage';
 import ManualJoin from './pages/ManualJoin';
 import CreateRoom from './pages/CreateRoom';
 import WelcomePage from './pages/WelcomePage';
+import Chatting from './pages/Chatting';
 import './App.css';
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
           <Route path="/rooms" element={<RoomListPageWrapper />} />
           <Route path="/manual-join" element={<ManualJoinWrapper />} />
           <Route path="/create-room" element={<CreateRoomWrapper />} />
+          <Route path="/chat/:roomCode" element={<Chatting />} />
         </Routes>
       </ActiveTabProvider>
     </Router>

@@ -1,0 +1,145 @@
+.chatting-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  margin: 0 auto;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; 
+}
+
+.chat-content {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; 
+}
+
+.chat-sidebar {
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 20px;
+  width: 25%;
+  overflow-y: auto;
+}
+
+.messaging-form {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.input {
+  flex-grow: 1; /* Let input field grow to occupy available space */
+  border-radius: 10px;
+  padding: 15px; /* Larger padding for a bigger input box */
+  font-size: 16px; /* Larger font size for text input */
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.sendMessageButton,
+.recordButton {
+  flex: 0 0 auto; /* Prevent buttons from stretching */
+  height: 100%; /* Set the height to match the input field */
+  background-color: #16a085;
+  height: 55px;
+  margin-top: 12px;
+  width: 15%;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 20px;
+  cursor: pointer;
+}
+
+.recordButton.recording {
+  background-color: #c0392b; /* Change color when recording */
+}
+
+
+.message-bubble {
+  position: relative; /* This line is necessary for proper positioning of the tails */
+  padding: 15px 25px; 
+  border-radius: 25px; /* More rounded corners */
+  display: flex;
+  max-width: 60%;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 6px #00000029; /* Subtle shadow */
+}
+
+.other-message {
+  background-color: #DCF8C6; /* Lighter green */
+  color: black;
+  margin-right: auto;
+  border-bottom-right-radius: 0;
+}
+
+.user-message {
+  background-color: #A9DFF7; /* Light blue for the current user */
+  color: black;
+  margin-left: auto;
+  border-bottom-left-radius: 0;
+}
+
+.message-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.other-message::before {
+  left: -10px; /* Adjust this value to fit the design */
+  border-width: 10px 10px 10px 0; /* Adjust to point the tail to the left */
+  border-color: transparent #DCF8C6 transparent transparent; /* Adjust color to match .other-message background */
+}
+
+.user-message::before {
+  right: -10px; /* Adjust this value to fit the design */
+  border-width: 10px 0 10px 10px; /* Adjust to point the tail to the right */
+  border-color: transparent transparent transparent #A9DFF7; /* Adjust color to match .user-message background */
+}
+
+/* Hover effects for both buttons for interactive feedback */
+.recordButton:hover, .stopRecordingButton:hover {
+  background-color: #0e8d6a; /* A darker green for hover effect */
+}
+
+.chat-sidebar {
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 20px;
+  width: 20%;
+  overflow-y: auto;
+}
+
+.display-message {
+  overflow-y: auto;
+  margin-top: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+}
+
+@media (max-width: 768px) {
+  .chatting-container {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+  .chat-sidebar, .chat-content {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

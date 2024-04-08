@@ -7,23 +7,48 @@ body {
   position: relative; /* This will be the reference for absolute positioning */
 }
 
+
+.tab-container {
+  display: flex;
+  flex-direction: column; /* Stack input field and button vertically */
+  align-items: center; /* Center-align the child elements */
+  justify-content: center; /* Center vertically in case of extra space */
+  padding: 2rem; /* Padding inside the container */
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Maximum width to maintain reasonable sizing */
+  margin: 2rem auto; /* Center the container on the page */
+}
+
+
 .tabs-container {
   display: flex;
-  justify-content: start; /* Changed to 'start' to align tabs to the left */
+  justify-content: center; /* Adjust to center if you set a specific width */
   align-items: center;
   background: white;
-  padding: 0.5rem 1rem;
+  padding: 1rem 6rem; /* Increased padding */
   border-radius: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   margin-top: 1rem;
-  width: auto; /* Adjust if you want a specific max width, or remove it to allow content sizing */
+  width: 80%; /* Adjust this to increase the width */
+  max-width: 1200px; /* Increased max-width */
   box-sizing: border-box;
+  margin-left: auto; /* Ensure margin auto for left and right to center */
+  margin-right: auto;
+  font-family: 'Roboto', sans-serif; /* Use the imported Google Font */
+
+}
+
+.tab.active {
+  color: #ffffff; /* White text for better contrast */
+  background-color: #007bff; /* A blue shade that stands out */
+  border-color: #007bff;
 }
 
 .tab {
   text-decoration: none;
   color: black;
+  font-size: 1.25rem; /* Increase font-size as needed */
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
   border-radius: 15px;
@@ -43,45 +68,152 @@ body {
   color: blue;
 }
 
+.join-button:active {
+  transform: translateY(2px); /* Gives a feeling of the button being pressed */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Smaller shadow to mimic the button being pressed */
+}
+
 .underline {
   position: absolute;
   bottom: 0;
   left: 0; /* Initial position, will be overridden by JavaScript */
-  height: 3px;
+  height: 2px;
   background-color: blue;
   transition: left 0.3s ease-out, width 0.3s ease-out;
 }   
 
 
 .room-list-container {
-  width: 85%; /* Adjust the width of the container */
-  max-width: 800px; /* You can adjust this value to be larger or smaller */
-  margin-right: 4rem;
-  background-color: white; /* Keeping the box white */
-  padding: 2rem; /* Increase padding inside the box */
-  border-radius: 15px; /* Slightly more rounded corners for aesthetics */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-  margin-top: 2rem; /* Space between the tabs-container and room-list-container */
+  width: 90%; /* Increased width percentage */
+  max-width: 1000px; /* Increased max-width */
+  margin: 2rem auto; /* Adjusted margin for auto on all sides to keep centered */
+  background-color: white;
+  padding: 4rem;
+  margin-bottom: 1rem; /* Adjust as necessary for more separation between entries */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Stack room entries vertically */
-  align-items: flex-start; /* Align room entries to the start of the flex container */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .join-button {
-  padding: 0.5rem 1rem;
-  background-color: #2563eb; /* Keeps the join button blue */
-  color: white;
+  padding: 0.5rem 2rem;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  margin-top: 0.5rem; /* Space above the button */
+  background-color: #7cd0d8;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s; /* Add transition for transform */
+}
+
+.join-button:hover {
+  background-color: #0abada;
+  transform: scale(1.05); /* Increase size on hover */
+}
+
+.error-message {
+  color: #b12121; /* Commonly used color for errors */
+  text-align: center; /* Center-align the text */
+  margin-top: 1rem; /* Space between the error message and the button/input field */
+  font-size: 0.9rem; /* Slightly smaller font size for the error message */
+  padding: 0.5rem; /* Padding to make the error message stand out */
+  background-color: #ffebee; /* Light red background color for the error message */
+  border-radius: 0.5rem; /* Rounded corners for the error message */
+  margin: 0 auto 2rem; /* Adjust the margin to add space below the error message */
+  width: 80%; /* Match the width of the input field */
+  max-width: 500px; /* Ensure it does not become too wide on larger screens */
 }
 
 .input {
   display: block;
-  margin: 1rem 0;
-  padding: 0.5rem;
-  border: 1px solid #2563eb;
+  margin: 2rem auto; /* Increased margin for more vertical space */
+  padding: 1.25rem 1rem; /* Increased vertical padding */
+  border: 2px solid #2563eb; /* Solid border with a color */
   border-radius: 0.5rem;
-  width: calc(100% - 2rem); /* Full width minus padding */
+  font-size: 1rem; /* Larger font size for better readability */
+  width: 80%; /* Responsive width */
+  max-width: 500px; /* Maximum width of the input field */
+}
+
+
+@media (max-width: 768px) {
+  .tabs-container {
+    padding: 1rem; /* Decrease padding on smaller screens */
+    width: 95%; /* Allow the container to take more width on smaller screens */
+  }
+}
+
+
+
+
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  50% { border-color: transparent; }
+}
+
+.create-room-container {
+  display: flex;
+  flex-direction: column; /* Stack the title and button vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  height: 100vh; /* Full viewport height to take up the entire screen */
+  font-family: 'Arial', sans-serif; /* Set the font for the container */
+  text-align: center; /* Align the text to the center for all child text elements */
+  
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+.create-room-title {
+   font-family: 'Roboto', sans-serif; /* Use the imported Google Font */
+  font-weight: 700; /* Optional: 700 for bold text */
+  margin-bottom: 20px; /* Space between title and button */
+  font-size: 2rem;
+  color: #7cd0d8;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%; /* Make sure the width is full to center the text correctly */
+  animation: typing 4s steps(40, end) forwards, blink-caret 1s step-end infinite;
+  /* Rest of your animations */
+}
+
+.btn {
+  background-color: #7cd0d8;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.containers {
+  background: white;
+  margin-top: 400px; /* Add more margin to the top to push it down */
+  padding: 2rem; /* Adjust the padding as needed */
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   max-width: 80%;/* Increase max-width for a wider container */
+  height: 400px; /* Set a fixed height for a shorter container */
+  margin-top: 5vh; /* This will make the container lower by 5% of the viewport height */
+
 }

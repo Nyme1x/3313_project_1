@@ -1,20 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Globe from './../images/globe.png';   
-
-import './../css/WelcomePage.css'; 
+import './../css/WelcomePage.css';
+import Globe from './../images/globe.png';
 
 const WelcomePage = () => {
   const [username, setUsername] = useState('');
-  const navigate = useNavigate(); 
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const websocketUrl = 'ws://127.0.0.1:5000';
+  
+  useEffect(() => {
+    if (username.trim()) {
+      const socket = new WebSocket(websocketUrl);
+      socket.onopen = () => {
+        socket.send(`SET_USERNAME:${username}`);
+      };
+      socket.onclose = () => {
+        console.log('Socket closed');
+      };
+      socket.onmessage = (event) => {
+        console.log(event.data); 
+        if (event.data === 'Username set successfully') {
+          localStorage.setItem('username', username);
+          navigate('/rooms'); 
+        } else {
+          setError('Error setting username');
+        }
+      };
+    }
+  }, [username, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username) {
+    
+    if (username.trim()) {
       console.log(`Username entered: ${username}`);
+      localStorage.setItem('username', username);
+      
       navigate('/rooms'); 
     } else {
-      alert('Please enter a username.');
+      setError('Please enter a username.');
     }
   };
 
@@ -22,8 +47,9 @@ const WelcomePage = () => {
     <div className="h-screen flex flex-col items-center justify-center">
       <img src={Globe} alt="Globe" className="globe-img" />
       <div className="form-container text-center p-8 bg-white shadow-xl rounded-2xl animate-container">
-      <h1 className="animated-typing">Welcome to ChatterSphere!</h1>
+        <h1 className="animated-typing">Welcome to ChatterSphere!</h1>
         <p className="text-xl text-blue-500 mb-8 animated-subtext">Please enter a username to start chatting today!</p>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="flex flex-col items-center relative animated-form">
           <input
             type="text"

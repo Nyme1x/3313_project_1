@@ -70,7 +70,7 @@
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 35%; /* Adjust if needed */
+  width: 42%; /* Adjust if needed */
   opacity: 0.5; /* Adjust if needed */
   z-index: 0; /* Ensures the image stays behind the form container */
   animation: spin 60s linear infinite; /* Adjust the time for one full rotation as needed */
