@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner'; 
 import './../css/RoomListPage.css';
 import './../css/WelcomePage.css';
+const config = require('../config.js');
 
 const RoomListPage = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true); 
-  const websocketUrl = 'ws://3.208.31.8:5000';
+  const { websocketUrl } = config;
 
   useEffect(() => {
   

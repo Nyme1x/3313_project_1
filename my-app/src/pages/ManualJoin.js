@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../css/TabNavigation.css';
+const config = require('../config.js');
 
 const ManualJoinPage = () => {
     const [roomName, setRoomName] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [websocket, setWebsocket] = useState(null); 
-    const websocketUrl = 'ws://3.208.31.8:5000';
+    const { websocketUrl } = config;
 
     useEffect(() => {
         const ws = new WebSocket(websocketUrl);
@@ -21,7 +22,7 @@ const ManualJoinPage = () => {
             const message = event.data;
 
             if (message.startsWith('Invalid')) {
-                // If the message starts with 'Invalid', it indicates an error
+
                 setError('Invalid room code. Please try again.');
             }
         };
@@ -30,9 +31,8 @@ const ManualJoinPage = () => {
             setError('');
         };
 
-        setWebsocket(ws); // Set the WebSocket connection
+        setWebsocket(ws); 
 
-        // Clean up function that closes the WebSocket connection
         return () => {
             if (ws) {
                 ws.close();
@@ -49,7 +49,7 @@ const ManualJoinPage = () => {
         if (websocket && websocket.readyState === WebSocket.OPEN) {
             websocket.send(`JOIN ${roomName}`);
             console.log(`Attempting to join room: ${roomName}`);
-            navigate(`/chat/${roomName}`); // Navigate immediately after attempting to join
+            navigate(`/chat/${roomName}`);
         } else {
             console.error('WebSocket is not open. Cannot join room.');
             setError('WebSocket is not open. Cannot join room.');
@@ -62,7 +62,7 @@ const ManualJoinPage = () => {
                 type="text"
                 value={roomName}
                 onChange={(e) => {
-                    setError(''); // Clear error message when user starts typing
+                    setError(''); 
                     setRoomName(e.target.value);
                 }}
                 placeholder="Enter room code"
@@ -71,7 +71,7 @@ const ManualJoinPage = () => {
             <button onClick={handleJoinRoom} className="join-button">
                 Join Room
             </button>
-            {error && <div className="error-message">{error}</div>} {/* Display error message if any */}
+            {error && <div className="error-message">{error}</div>}
         </div>
     );
 };

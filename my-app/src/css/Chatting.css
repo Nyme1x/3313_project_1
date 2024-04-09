@@ -5,9 +5,24 @@
   align-items: flex-start;
   padding: 20px;
   margin: 0 auto;
-  height: 100vh; /* Use the full height of the viewport */
+  height: 100vh;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow-x: auto;
+}
+.backToRoomsButton {
+  z-index: 1000; 
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: white; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 20px; 
+}
+
+.backToRoomsButton:hover {
+  background-color: #0056b3; 
 }
 
 
@@ -19,17 +34,31 @@
   width: 80%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Allow scrolling for overflow */
-  max-height: 80vh; /* Limit to 80% of the viewport height */
+  overflow-y: auto; 
+  max-height: 80vh; 
 }
 
+
+.Chat {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  max-height: 80vh; 
+}
+
+
 .display-message {
-  overflow-y: auto; /* Enable vertical scroll for messages */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Add space between messages */
-  margin-bottom: 10px; /* Space at the bottom */
+  gap: 10px; 
+  margin-bottom: 10px;
+  
 }
 
 .messaging-form {
@@ -46,6 +75,27 @@
   border: 1px solid #ccc;
 }
 
+.recordButton {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 20px; 
+  padding: 10px;
+  border-radius: 50%; 
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recordButton.recording {
+  background-color: #dc3545;
+}
+
+.recordButton i {
+  font-size: 24px;
+}
+
 .sendMessageButton:hover, .recordButton:hover {
   background-color: lightblue;
 }
@@ -53,17 +103,17 @@
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  font-size: 20px; /* Increase font size for better visibility */
-  padding: 15px 30px; /* Increase padding for a larger button */
-  border-radius: 8px; /* Optional: Adjust border-radius for rounded corners */
-  border: none; /* Optional: Remove border if you prefer */
-  margin: 5px; /* Optional: Ensure some space around the buttons */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  font-size: 20px; 
+  padding: 15px 30px;
+  border-radius: 8px; 
+  border: none; 
+  margin: 5px; 
+  transition: background-color 0.3s ease; 
 }
 
-/* Enhancing button interactivity with a hover effect */
+
 .sendMessageButton:hover, .recordButton:hover {
-  background-color: #0056b3; /* Darker shade on hover for better user feedback */
+  background-color: #0056b3; 
 }
 
 
@@ -72,13 +122,13 @@
 }
 
 .message-bubble {
-  max-width: 80%; /* Increase max-width for larger bubbles */
-  padding: 20px 30px; /* Increase padding for more space inside the bubbles */
-  border-radius: 50%; /* Adjust border-radius for a more rounded look on bigger bubbles */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional: Adjust shadow for depth */
+  max-width: 80%; 
+  padding: 20px 30px; 
+  border-radius: 28px; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   display: inline-block;
-  font-size: 18px; /* Increase font size for readability */
-  margin-bottom: 15px; /* Adjust spacing between messages as needed */
+  font-size: 18px;
+  margin-bottom: 15px; 
 
   margin: 20px;
 }

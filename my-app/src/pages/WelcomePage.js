@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../css/WelcomePage.css';
 import Globe from './../images/globe.png';
+const config = require('../config.js');
 
 const WelcomePage = () => {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const websocketUrl = 'ws://3.208.31.8:5000';
+  const { websocketUrl } = config;
   
   useEffect(() => {
     if (username.trim()) {

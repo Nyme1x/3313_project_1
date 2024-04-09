@@ -14,7 +14,6 @@ const TabNavigation = () => {
   ];
 
   useEffect(() => {
-    // Function to find the active tab based on the current pathname
     const findActiveTab = () => {
       return tabRefs.current.find(tab => tab && tab.getAttribute('href') === location.pathname);
     };
@@ -31,11 +30,7 @@ const TabNavigation = () => {
         });
       }
     };
-
-    // Call the update function on mount and when location changes
     updateUnderline();
-
-    // Optional: Resize listener to reposition underline on window resize
     window.addEventListener('resize', updateUnderline);
     return () => window.removeEventListener('resize', updateUnderline);
   }, [location]);
@@ -47,7 +42,7 @@ const TabNavigation = () => {
           key={index}
           to={tab.path}
           className={({ isActive }) => (isActive ? 'tab active' : 'tab')}
-          ref={el => tabRefs.current[index] = el} // Store the DOM node
+          ref={el => tabRefs.current[index] = el}
         >
           {tab.name}
         </NavLink>

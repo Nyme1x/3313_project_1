@@ -26,17 +26,12 @@ const App = () => {
   );
 };
 
-// Components that render the pages with TabNavigation
 const RoomListPageWrapper = () => <PageWithTabs><RoomListPage /></PageWithTabs>;
 const ManualJoinWrapper = () => <PageWithTabs><ManualJoin /></PageWithTabs>;
 const CreateRoomWrapper = () => <PageWithTabs><CreateRoom /></PageWithTabs>;
 
-// Component to render TabNavigation and the current page
 const PageWithTabs = ({ children }) => {
   const { activeTab, setActiveTab } = useActiveTab();
-
-  // Optionally, use useEffect here to set the active tab based on the current route
-  // This assumes TabNavigation allows for an `setActiveTab` prop to change the active state
   return (
     <>
       <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
